@@ -1255,11 +1255,11 @@
       
       const radius = Math.max(9, node.connections_count * 1.5 + 7);
       
-      let color = "#007aff";
-      if (node.entity_type === "location") color = "#34c759";
-      else if (node.entity_type === "item") color = "#ff9500";
-      else if (node.entity_type === "faction") color = "#5856d6";
-      else if (node.entity_type === "magic") color = "#ff3b30";
+      let color = "#8b5cf6"; // character (Electric Violet)
+      if (node.entity_type === "location") color = "#4edea3"; // location (Emerald / Success)
+      else if (node.entity_type === "item") color = "#adc6ff"; // item (Sky Blue / Warning)
+      else if (node.entity_type === "faction") color = "#10b981"; // faction (Emerald Green)
+      else if (node.entity_type === "magic") color = "#ffb4ab"; // magic (Danger Red/Pink)
 
       const isSelected = selectedNodeId === node.id;
       const isLinkedToSelected = selectedNodeId ? nodesAreConnected(selectedNodeId, node.id) : false;
@@ -1341,7 +1341,7 @@
 
 <div class="window-shell">
   <!-- macOS Window Decoration Header -->
-  <header class="window-header glass">
+  <header class="window-header glass-panel">
     <div class="window-controls">
       <span class="dot red"></span>
       <span class="dot yellow"></span>
@@ -1398,42 +1398,42 @@
     <div class="workspace-layout">
       
       <!-- macOS-style Sidebar -->
-      <aside class="sidebar glass">
+      <aside class="sidebar glass-panel">
         <nav class="nav-menu">
-          <button class="nav-btn" class:active={activeTab === "info"} onclick={() => activeTab = "info"}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+          <button class="nav-btn" class:active={activeTab === "info"} class:active-pill={activeTab === "info"} onclick={() => activeTab = "info"}>
+            <span class="material-symbols-outlined">info</span>
             <span>Detalles</span>
           </button>
           
           <div class="nav-section-title">Escritura</div>
-          <button class="nav-btn" class:active={activeTab === "docs"} onclick={() => activeTab = "docs"}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <button class="nav-btn" class:active={activeTab === "docs"} class:active-pill={activeTab === "docs"} onclick={() => activeTab = "docs"}>
+            <span class="material-symbols-outlined">folder_open</span>
             <span>Documentos</span>
           </button>
 
           <div class="nav-section-title">Worldbuilding</div>
-          <button class="nav-btn" class:active={activeTab === "entities"} onclick={() => activeTab = "entities"}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <button class="nav-btn" class:active={activeTab === "entities"} class:active-pill={activeTab === "entities"} onclick={() => activeTab = "entities"}>
+            <span class="material-symbols-outlined">group</span>
             <span>Entidades</span>
           </button>
-          <button class="nav-btn" class:active={activeTab === "tags"} onclick={() => activeTab = "tags"}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+          <button class="nav-btn" class:active={activeTab === "tags"} class:active-pill={activeTab === "tags"} onclick={() => activeTab = "tags"}>
+            <span class="material-symbols-outlined">tag</span>
             <span>Etiquetas</span>
           </button>
-          <button class="nav-btn" class:active={activeTab === "links"} onclick={() => activeTab = "links"}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <button class="nav-btn" class:active={activeTab === "links"} class:active-pill={activeTab === "links"} onclick={() => activeTab = "links"}>
+            <span class="material-symbols-outlined">share</span>
             <span>Relaciones</span>
           </button>
-          <button class="nav-btn" class:active={activeTab === "graph"} onclick={() => { activeTab = "graph"; loadGraphData(); }}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          <button class="nav-btn" class:active={activeTab === "graph"} class:active-pill={activeTab === "graph"} onclick={() => { activeTab = "graph"; loadGraphData(); }}>
+            <span class="material-symbols-outlined">bubble_chart</span>
             <span>Grafo 2D</span>
           </button>
-          <button class="nav-btn" class:active={activeTab === "flow"} onclick={() => { activeTab = "flow"; loadFlowData(); }}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect><path d="M7 12v4M14 5.5H10v11h4M7 8h3"></path></svg>
+          <button class="nav-btn" class:active={activeTab === "flow"} class:active-pill={activeTab === "flow"} onclick={() => { activeTab = "flow"; loadFlowData(); }}>
+            <span class="material-symbols-outlined">account_tree</span>
             <span>Flujos</span>
           </button>
-          <button class="nav-btn" class:active={activeTab === "timeline"} onclick={() => { activeTab = "timeline"; loadTimelineData(); }}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <button class="nav-btn" class:active={activeTab === "timeline"} class:active-pill={activeTab === "timeline"} onclick={() => { activeTab = "timeline"; loadTimelineData(); }}>
+            <span class="material-symbols-outlined">schedule</span>
             <span>Línea Temporal</span>
           </button>
         </nav>
@@ -1587,7 +1587,7 @@
 
                 <!-- Collapsible Right Sidebar (Analysis Panel) -->
                 {#if !zenMode}
-                  <aside class="analysis-sidebar glass">
+                  <aside class="analysis-sidebar glass-panel">
                     <div class="analysis-section">
                       <h3>Análisis de Escena</h3>
                       <div class="stats-row">
@@ -2976,29 +2976,29 @@
   }
 
   .event-entity-badge.character {
-    background: rgba(0, 122, 255, 0.15);
-    border: 1px solid rgba(0, 122, 255, 0.3);
-    color: #007aff;
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--accent);
   }
   .event-entity-badge.location {
-    background: rgba(52, 199, 89, 0.15);
-    border: 1px solid rgba(52, 199, 89, 0.3);
-    color: #34c759;
+    background: rgba(78, 222, 163, 0.15);
+    border: 1px solid rgba(78, 222, 163, 0.3);
+    color: var(--success);
   }
   .event-entity-badge.item {
-    background: rgba(255, 149, 0, 0.15);
-    border: 1px solid rgba(255, 149, 0, 0.3);
-    color: #ff9500;
+    background: rgba(173, 198, 255, 0.15);
+    border: 1px solid rgba(173, 198, 255, 0.3);
+    color: var(--warning);
   }
   .event-entity-badge.faction {
-    background: rgba(88, 86, 214, 0.15);
-    border: 1px solid rgba(88, 86, 214, 0.3);
-    color: #5856d6;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--accent-secondary);
   }
   .event-entity-badge.magic {
-    background: rgba(255, 59, 48, 0.15);
-    border: 1px solid rgba(255, 59, 48, 0.3);
-    color: #ff3b30;
+    background: rgba(255, 180, 171, 0.15);
+    border: 1px solid rgba(255, 180, 171, 0.3);
+    color: var(--danger);
   }
 
   .badge-dot {
@@ -3031,11 +3031,11 @@
     transition: r 0.2s var(--transition-fast), stroke 0.2s;
   }
 
-  .node-circle.character { fill: #007aff; }
-  .node-circle.location { fill: #34c759; }
-  .node-circle.item { fill: #ff9500; }
-  .node-circle.faction { fill: #5856d6; }
-  .node-circle.magic { fill: #ff3b30; }
+  .node-circle.character { fill: #8b5cf6; }
+  .node-circle.location { fill: #4edea3; }
+  .node-circle.item { fill: #adc6ff; }
+  .node-circle.faction { fill: #10b981; }
+  .node-circle.magic { fill: #ffb4ab; }
 
   .node-circle:hover {
     stroke: #ffffff;
@@ -3084,7 +3084,9 @@
     align-items: center;
     padding: var(--space-2) var(--space-4);
     border-bottom: 1px solid var(--border-primary);
-    background-color: var(--bg-window);
+    background-color: var(--glass-panel-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     height: 48px;
     flex-shrink: 0;
   }
@@ -3285,11 +3287,11 @@
     font-weight: 500;
   }
 
-  .entity-pill.character { background: rgba(0, 122, 255, 0.12); color: var(--accent); }
-  .entity-pill.location { background: rgba(52, 199, 89, 0.12); color: var(--success); }
-  .entity-pill.item { background: rgba(255, 149, 0, 0.12); color: var(--warning); }
-  .entity-pill.faction { background: rgba(88, 86, 214, 0.12); color: var(--accent-secondary); }
-  .entity-pill.magic { background: rgba(255, 59, 48, 0.12); color: var(--danger); }
+  .entity-pill.character { background: rgba(139, 92, 246, 0.12); color: var(--accent); }
+  .entity-pill.location { background: rgba(78, 222, 163, 0.12); color: var(--success); }
+  .entity-pill.item { background: rgba(173, 198, 255, 0.12); color: var(--warning); }
+  .entity-pill.faction { background: rgba(16, 185, 129, 0.12); color: var(--accent-secondary); }
+  .entity-pill.magic { background: rgba(255, 180, 171, 0.12); color: var(--danger); }
 
   .tag-pill {
     font-size: 11px;
@@ -3795,13 +3797,18 @@
   }
 
   .nav-btn.active {
-    background-color: var(--accent);
-    color: #ffffff;
+    background-color: rgba(139, 92, 246, 0.15); /* Stitch Electric Violet tint */
+    color: var(--accent);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
   }
 
-  .nav-btn .icon {
-    width: 16px;
-    height: 16px;
+  .nav-btn .icon, .nav-btn .material-symbols-outlined {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .sidebar-footer {
@@ -4057,11 +4064,11 @@
     letter-spacing: 0.02em;
   }
 
-  .badge.character { background: rgba(0, 122, 255, 0.1); color: var(--accent); }
-  .badge.location { background: rgba(52, 199, 89, 0.1); color: var(--success); }
-  .badge.item { background: rgba(255, 149, 0, 0.1); color: var(--warning); }
-  .badge.faction { background: rgba(88, 86, 214, 0.1); color: var(--accent-secondary); }
-  .badge.magic { background: rgba(255, 59, 48, 0.1); color: var(--danger); }
+  .badge.character { background: rgba(139, 92, 246, 0.12); color: var(--accent); }
+  .badge.location { background: rgba(78, 222, 163, 0.12); color: var(--success); }
+  .badge.item { background: rgba(173, 198, 255, 0.12); color: var(--warning); }
+  .badge.faction { background: rgba(16, 185, 129, 0.12); color: var(--accent-secondary); }
+  .badge.magic { background: rgba(255, 180, 171, 0.12); color: var(--danger); }
 
   /* Empty States */
   .empty-state {
