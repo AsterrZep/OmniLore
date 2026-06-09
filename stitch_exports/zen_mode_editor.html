@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniLore - Zen Mode</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration (Design System) -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#d0bcff",
+                        "on-tertiary-container": "#082858",
+                        "on-secondary-fixed-variant": "#005236",
+                        "secondary": "#4edea3",
+                        "primary-fixed-dim": "#d0bcff",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-highest": "#333539",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#e2e2e8",
+                        "on-secondary-container": "#00311f",
+                        "background": "#111317",
+                        "primary-container": "#a078ff",
+                        "error-container": "#93000a",
+                        "outline": "#958ea0",
+                        "on-tertiary-fixed": "#001a42",
+                        "tertiary-fixed": "#d8e2ff",
+                        "tertiary": "#adc6ff",
+                        "inverse-surface": "#e2e2e8",
+                        "on-tertiary": "#122f5f",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-primary": "#3c0091",
+                        "inverse-primary": "#6d3bd7",
+                        "on-error": "#690005",
+                        "on-secondary": "#003824",
+                        "on-primary-container": "#340080",
+                        "tertiary-container": "#7890c6",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-primary-fixed-variant": "#5516be",
+                        "surface-container-high": "#282a2e",
+                        "surface-dim": "#111317",
+                        "surface-bright": "#37393e",
+                        "on-primary-fixed": "#23005c",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#00a572",
+                        "on-tertiary-fixed-variant": "#2c4677",
+                        "surface-container": "#1e2024",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#333539",
+                        "surface-container-low": "#1a1c20",
+                        "secondary-fixed": "#6ffbbe",
+                        "outline-variant": "#494454",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-tint": "#d0bcff",
+                        "surface": "#111317",
+                        "on-surface": "#e2e2e8",
+                        "inverse-on-surface": "#2f3035",
+                        "surface-container-lowest": "#0c0e12"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "sidebar-width": "260px",
+                        "inspector-width": "300px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "label-sm": ["JetBrains Mono", "monospace"],
+                        "code-md": ["JetBrains Mono", "monospace"],
+                        "body-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "code-md": ["14px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "36px", "fontWeight": "400" }] /* Increased line height for focus */
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for deep dark aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Subtle fade in for Zen Mode entry */
+        @keyframes fadeInZen {
+            from { opacity: 0; transform: scale(0.99); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .zen-entry {
+            animation: fadeInZen 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* Editor specific overrides for clean look */
+        [contenteditable]:focus {
+            outline: none;
+        }
+        
+        /* Subtle selection color */
+        ::selection {
+            background: rgba(139, 92, 246, 0.3); /* Electric Violet tint */
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased min-h-screen flex justify-center overflow-x-hidden selection:bg-primary/30">
+<!-- Subtle Floating Controls -->
+<div class="fixed top-8 right-8 z-50 flex items-center gap-4 opacity-30 hover:opacity-100 transition-opacity duration-300">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container/50 backdrop-blur-md border border-white/5 hover:border-white/10 hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all font-label-sm text-label-sm uppercase tracking-widest cursor-pointer group">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-0.5 transition-transform">fullscreen_exit</span>
+            Exit Zen Mode
+        </button>
+</div>
+<!-- Main Writing Canvas -->
+<main class="w-full max-w-[840px] px-8 py-24 md:py-32 zen-entry flex flex-col items-center">
+<!-- The "Paper" -->
+<article class="w-full bg-surface-container-low/80 backdrop-blur-2xl border border-white/[0.02] rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.5)] p-12 md:p-20 relative">
+<!-- Contextual Draft Info (Very subtle) -->
+<div class="absolute top-8 left-12 font-label-sm text-label-sm text-on-surface-variant/30 uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">edit_note</span>
+                Draft 3 • Auto-saved just now
+            </div>
+<!-- Chapter Title -->
+<h1 class="font-headline-xl text-headline-xl text-primary/90 mt-8 mb-12 text-center bg-transparent border-none placeholder-on-surface-variant/20 focus:text-primary transition-colors cursor-text" contenteditable="true" placeholder="Chapter Title...">
+                Chapter V: The Sword in the Stone
+            </h1>
+<!-- Body Text Area -->
+<div class="font-body-lg text-body-lg text-on-surface-variant/90 space-y-8 cursor-text focus:text-on-surface transition-colors min-h-[512px]" contenteditable="true">
+<p>
+                    The snow lay thick and undisturbed in the churchyard, blanketing the ancient graves in a silence so profound it felt heavy. Arthur pulled his cloak tighter against the biting wind, his breath pluming in the crisp morning air. He had been sent to fetch Sir Kay's sword, a simple errand, yet the pavilion was locked, and the tournament was about to begin. Panic, cold and sharp as the frost, gnawed at him.
+                </p>
+<p>
+                    It was then he saw it. Rising from the center of the courtyard, surrounded by a halo of undisturbed snow, was a massive block of dark marble. Anvil-shaped, it seemed to drink the pale winter light. And thrust deep into its heart was a sword. 
+                </p>
+<p>
+                    The hilt was ornate, wrapped in worn leather and bound with gold wire that caught a solitary ray of breaking sun. The pommel held a gemstone that seemed to pulse with a dormant, subterranean fire. Letters were etched deep into the stone block beneath it, though Arthur, in his haste, did not stop to decipher them. He needed a weapon for his brother. This one was abandoned, forgotten.
+                </p>
+<p>
+                    He approached, his footsteps the only sound in the vast, white stillness. He reached out, his gloved hand closing around the cold grip. As his fingers tightened, a strange sensation washed over him—not a shock, but a deep, resonant hum that vibrated through his bones, like the tolling of a distant, massive bell. He pulled.
+                </p>
+<p>
+                    It did not catch. It did not grate against the stone. The blade slid free as smoothly as if it had been resting in oiled leather. Arthur stumbled back slightly, the weight of the magnificent weapon perfect in his hand, the air suddenly thick with an unspoken destiny.
+                </p>
+</div>
+<!-- Writing Prompts / Ghost Text at bottom (Optional feature for Zen Mode) -->
+<div class="mt-12 pt-8 border-t border-white/5 opacity-0 hover:opacity-100 transition-opacity flex justify-center">
+<button class="font-label-sm text-label-sm text-secondary/70 hover:text-secondary uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">magic_button</span>
+                    Generate Next Sentence
+                </button>
+</div>
+</article>
+<!-- Bottom Padding for scrolling comfort -->
+<div class="h-32 w-full"></div>
+</main>
+<!-- Minimal Status Indicator -->
+<div class="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-1 opacity-20 hover:opacity-80 transition-opacity duration-300">
+<div class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+            342 words
+        </div>
+<div class="font-label-sm text-label-sm text-on-surface-variant/50 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 100% Focused
+        </div>
+</div>
+<!-- Script for interactive elements (Word count simulation) -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editor = document.querySelector('div[contenteditable="true"]');
+            const wordCountDisplay = document.querySelector('.fixed.bottom-8.right-8 > div:first-child');
+            
+            // Simple word counter
+            const updateWordCount = () => {
+                const text = editor.innerText || editor.textContent;
+                const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+                wordCountDisplay.innerText = `${words.length} words`;
+            };
+
+            // Listen for typing
+            editor.addEventListener('input', updateWordCount);
+            
+            // Initial count
+            updateWordCount();
+        });
+    </script>
+</body></html>

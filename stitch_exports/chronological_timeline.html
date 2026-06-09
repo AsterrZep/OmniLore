@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniLore - Timeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#d0bcff",
+                        "on-tertiary-container": "#082858",
+                        "on-secondary-fixed-variant": "#005236",
+                        "secondary": "#4edea3",
+                        "primary-fixed-dim": "#d0bcff",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container-highest": "#333539",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#e2e2e8",
+                        "on-secondary-container": "#00311f",
+                        "background": "#111317",
+                        "primary-container": "#a078ff",
+                        "error-container": "#93000a",
+                        "outline": "#958ea0",
+                        "on-tertiary-fixed": "#001a42",
+                        "tertiary-fixed": "#d8e2ff",
+                        "tertiary": "#adc6ff",
+                        "inverse-surface": "#e2e2e8",
+                        "on-tertiary": "#122f5f",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "on-primary": "#3c0091",
+                        "inverse-primary": "#6d3bd7",
+                        "on-error": "#690005",
+                        "on-secondary": "#003824",
+                        "on-primary-container": "#340080",
+                        "tertiary-container": "#7890c6",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-primary-fixed-variant": "#5516be",
+                        "surface-container-high": "#282a2e",
+                        "surface-dim": "#111317",
+                        "surface-bright": "#37393e",
+                        "on-primary-fixed": "#23005c",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#00a572",
+                        "on-tertiary-fixed-variant": "#2c4677",
+                        "surface-container": "#1e2024",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#333539",
+                        "surface-container-low": "#1a1c20",
+                        "secondary-fixed": "#6ffbbe",
+                        "outline-variant": "#494454",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-tint": "#d0bcff",
+                        "surface": "#111317",
+                        "on-surface": "#e2e2e8",
+                        "inverse-on-surface": "#2f3035",
+                        "surface-container-lowest": "#0c0e12"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "sidebar-width": "260px",
+                        "inspector-width": "300px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "code-md": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "code-md": ["14px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "30px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F1115;
+            color: #e2e2e8;
+        }
+        .glass-panel {
+            background: rgba(17, 19, 23, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: #1A1C20;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glow-active:focus-within {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+            border-color: #a078ff;
+        }
+        
+        .timeline-axis::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(208, 188, 255, 0.2), transparent);
+            transform: translateX(-50%);
+        }
+        
+        /* Mac Window Controls */
+        .mac-controls {
+            display: flex;
+            gap: 8px;
+            padding: 16px;
+        }
+        .mac-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .mac-close { background: #FF5F56; }
+        .mac-min { background: #FFBD2E; }
+        .mac-max { background: #27C93F; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-primary/30 selection:text-primary font-body-md text-body-md">
+<!-- Mac Window Controls overlay -->
+<div class="fixed top-0 left-0 z-50 mac-controls pointer-events-none">
+<div class="mac-btn mac-close"></div>
+<div class="mac-btn mac-min"></div>
+<div class="mac-btn mac-max"></div>
+</div>
+<!-- SideNavBar -->
+<nav class="fixed h-full w-sidebar-width left-0 top-0 bg-surface/60 backdrop-blur-xl border-r border-white/10 shadow-2xl z-40 flex flex-col pt-14 pb-gutter">
+<div class="px-6 mb-8 mt-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">OmniLore</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Dark Arthurian Fantasy</p>
+</div>
+<div class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">book_2</span>
+<span>Chronicle</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">swords</span>
+<span>Relics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<span>Alliances</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span>Codex</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">map</span>
+<span>Cartography</span>
+</a>
+</div>
+<div class="px-4 mt-auto mb-4">
+<button class="w-full bg-primary-container text-on-primary-container hover:bg-primary font-body-md text-body-md py-2 px-4 rounded-lg transition-colors active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Begin New Chapter
+            </button>
+</div>
+<div class="border-t border-white/5 pt-4 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">monitoring</span>
+<span>Analytics</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 z-50 h-14 bg-surface/40 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-margin-desktop w-full ml-sidebar-width" style="width: calc(100% - 260px);">
+<div class="flex items-center gap-8 ml-4">
+<nav class="hidden md:flex gap-6 font-label-sm text-label-sm uppercase tracking-widest">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80 py-4" href="#">Editor</a>
+<a class="text-secondary border-b-2 border-secondary pb-1 py-4 cursor-pointer active:opacity-80" href="#">Timeline</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80 py-4" href="#">Graph</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80 py-4" href="#">Flow</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block group glow-active rounded-md transition-all">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="bg-surface-container-low border border-white/10 rounded-md py-1.5 pl-9 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-0 w-64 font-code-md text-code-md transition-all group-hover:border-white/20" placeholder="Search events..." type="text"/>
+</div>
+<button class="px-3 py-1.5 rounded border border-white/10 text-on-surface hover:text-primary hover:border-primary/50 transition-colors font-label-sm text-label-sm active:scale-95">Zen Mode</button>
+<button class="px-3 py-1.5 rounded bg-white/5 text-on-surface hover:bg-white/10 transition-colors font-label-sm text-label-sm active:scale-95">Share</button>
+<div class="flex items-center gap-2 border-l border-white/10 pl-4">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors rounded hover:bg-white/5 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors rounded hover:bg-white/5 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] pt-14 w-full h-full overflow-y-auto relative bg-background">
+<!-- Timeline Controls Header -->
+<div class="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5 px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">The Arthurian Epochs</h2>
+<div class="h-6 w-px bg-white/10"></div>
+<span class="font-code-md text-code-md text-secondary">42 Events</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface-container-low border border-white/10 text-on-surface-variant hover:text-on-surface hover:border-white/20 transition-all font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                    Filter
+                </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface-container-low border border-white/10 text-on-surface-variant hover:text-on-surface hover:border-white/20 transition-all font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">sort</span>
+                    Chronological
+                </button>
+<button class="flex items-center gap-2 px-4 py-1.5 rounded-md bg-primary text-on-primary hover:bg-primary-container transition-all font-label-sm text-label-sm font-bold shadow-[0_0_10px_rgba(208,188,255,0.2)]">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                    Add Event
+                </button>
+</div>
+</div>
+<!-- Timeline Container -->
+<div class="max-w-4xl mx-auto py-12 px-8 relative timeline-axis">
+<!-- Event 1: Left -->
+<div class="relative flex justify-end w-[calc(50%-2rem)] mb-16 pr-8">
+<!-- Timeline Dot -->
+<div class="absolute right-[-2.5rem] top-6 w-4 h-4 rounded-full bg-background border-2 border-primary shadow-[0_0_10px_rgba(208,188,255,0.5)] z-10 transform translate-x-1/2"></div>
+<!-- Card -->
+<div class="glass-card rounded-xl p-6 w-full max-w-md hover:border-primary/30 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="font-code-md text-code-md text-primary bg-primary/10 px-2 py-0.5 rounded">Solar Era 124</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity text-[18px]">edit</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">The Pulling of the Sword</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                        In a churchyard in London, young Arthur pulls the sword from the stone and anvil, proving his divine right to rule over a fractured Britain. This acts as the catalyst for the unification wars.
+                    </p>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">Arthur Pendragon</span>
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">London</span>
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">Excalibur</span>
+</div>
+</div>
+</div>
+<!-- Event 2: Right -->
+<div class="relative flex justify-start w-[calc(50%-2rem)] ml-auto mb-16 pl-8">
+<!-- Timeline Dot -->
+<div class="absolute left-[-2.5rem] top-6 w-4 h-4 rounded-full bg-background border-2 border-secondary shadow-[0_0_10px_rgba(78,222,163,0.3)] z-10 transform -translate-x-1/2"></div>
+<!-- Card -->
+<div class="glass-card rounded-xl p-6 w-full max-w-md hover:border-secondary/30 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="font-code-md text-code-md text-secondary bg-secondary/10 px-2 py-0.5 rounded">Solar Era 125</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity text-[18px]">edit</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">The Crowning of Arthur</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                        Following minor rebellions by the lesser kings, Arthur is officially crowned High King at Caerleon. Merlin establishes the magical wards around the newly claimed territory.
+                    </p>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">Merlin</span>
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">Caerleon</span>
+<span class="font-label-sm text-label-sm text-error bg-error/10 px-2 py-1 rounded border border-error/20">Political</span>
+</div>
+</div>
+</div>
+<!-- Event 3: Left -->
+<div class="relative flex justify-end w-[calc(50%-2rem)] mb-16 pr-8">
+<!-- Timeline Dot -->
+<div class="absolute right-[-2.5rem] top-6 w-4 h-4 rounded-full bg-background border-2 border-outline-variant z-10 transform translate-x-1/2"></div>
+<!-- Card -->
+<div class="glass-card rounded-xl p-6 w-full max-w-md hover:border-white/20 transition-colors group cursor-pointer opacity-70 hover:opacity-100">
+<div class="flex justify-between items-start mb-3">
+<span class="font-code-md text-code-md text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">Solar Era 128</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity text-[18px]">edit</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Formation of the Round Table</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                        King Leodegrance gifts the Round Table to Arthur as part of Guinevere's dowry. The initial knights are seated, establishing the code of chivalry that will define the era.
+                    </p>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">Guinevere</span>
+<span class="font-label-sm text-label-sm text-[#87CEEB] bg-[#87CEEB]/10 px-2 py-1 rounded border border-[#87CEEB]/20">Camelot</span>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary/10 px-2 py-1 rounded border border-tertiary/20">Knighthood</span>
+</div>
+</div>
+</div>
+<!-- Future marker -->
+<div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+<div class="w-px h-8 bg-gradient-to-b from-white/10 to-transparent"></div>
+<span class="material-symbols-outlined text-white/20 text-[24px] mt-2">keyboard_double_arrow_down</span>
+</div>
+</div>
+<!-- Bottom padding for scroll -->
+<div class="h-24"></div>
+</main>
+</body></html>
