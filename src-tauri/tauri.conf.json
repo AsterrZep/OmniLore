@@ -31,5 +31,13 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dGF1cmlfa2V5X3BsYWNlaG9sZGVyX2FjdHVhbF9rZXlfd2lsbF9iZV9nZW5lcmF0ZWRfYnlfdXNlcg==",
+      "endpoints": [
+        "https://github.com/AsterrZep/OmniLore/releases/latest/download/latest.json"
+      ]
+    }
   }
 }
