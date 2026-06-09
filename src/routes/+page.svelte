@@ -1379,17 +1379,24 @@
   <!-- Project Path Initializer (if no project loaded) -->
   {#if !projectInfo}
     <div class="project-loader">
-      <div class="loader-card glass">
-        <div class="branding-logo">
-          <svg class="brand-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
+      <div class="loader-card glass-card animate-fade-in" style="max-width: 440px; padding: var(--space-6);">
+        <div class="branding-logo" style="width: 60px; height: 60px; border-radius: var(--radius-full); background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); display: inline-flex; align-items: center; justify-content: center; margin-bottom: var(--space-4); box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);">
+          <span class="material-symbols-outlined" style="font-size: 32px; color: var(--accent);">auto_awesome</span>
         </div>
-        <h2>Cargar Espacio de Trabajo</h2>
-        <p>Selecciona o escribe el directorio local para almacenar los textos planos (.md/.fountain) y la base de datos SQLite.</p>
-        <div class="loader-input-group">
-          <input type="text" placeholder="Ruta absoluta de carpeta..." bind:value={projectPath} />
-          <button class="btn btn-primary" onclick={handleOpenProject}>Cargar Proyecto</button>
+        <h2 style="font-size: 22px; font-weight: 600; margin-bottom: var(--space-2); tracking-tight: -0.02em;">Cargar Espacio de Trabajo</h2>
+        <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin-bottom: var(--space-4);">
+          OmniLore structures your narrative using pure <span style="font-family: var(--font-mono); color: var(--accent);">.md</span> and <span style="font-family: var(--font-mono); color: var(--accent);">.fountain</span> files, indexed by a local SQLite database.
+        </p>
+        <div class="loader-input-group" style="text-align: left; width: 100%; margin-top: var(--space-4);">
+          <label for="project-path-input" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: var(--space-1); display: block;">Ruta Absoluta</label>
+          <div style="position: relative; display: flex; align-items: center; width: 100%;">
+            <span class="material-symbols-outlined" style="position: absolute; left: 10px; color: var(--text-secondary); font-size: 18px;">folder_open</span>
+            <input id="project-path-input" type="text" style="padding-left: 36px; width: 100%;" placeholder="Ruta absoluta de carpeta..." bind:value={projectPath} />
+          </div>
+          <button class="btn btn-primary" style="margin-top: var(--space-4); width: 100%; justify-content: center; gap: 8px;" onclick={handleOpenProject}>
+            <span>Cargar Proyecto</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+          </button>
         </div>
       </div>
     </div>
@@ -1398,7 +1405,18 @@
     <div class="workspace-layout">
       
       <!-- macOS-style Sidebar -->
-      <aside class="sidebar glass-panel">
+      <aside class="sidebar glass-panel" style="padding-top: var(--space-4);">
+        <!-- Sidebar Profile & Brand Header -->
+        <div class="sidebar-brand-header" style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-bottom: 1px solid var(--border-secondary); margin-bottom: var(--space-4);">
+          <div class="profile-avatar" style="width: 36px; height: 36px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-primary); background-color: var(--bg-system); flex-shrink: 0;">
+            <img alt="Curator Profile" class="w-full h-full object-cover" style="width: 100%; height: 100%; object-fit: cover;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYR0jAUoFxlN7JBFClS7r_FyY5tLL3fmlhQiv2gOzYzoA06NycFE1bWGWphWewZWo-YmEDX07AaTIVigimRGMyk-JuhzRCuyGC6N_rZy0H130QKgyi1ESNaPc1Ui8Pnw44NDi20GnEu1vSSs7bdhzVPoWWR3AlRfO_ypiV7IbdJmr_PWC0VLDVkzpjM0KBt2IfdqIXZMR8FFlRRjRH8_BYCiV3Ih3sKEvz_0q750bTNyctdieGJ_HVl5HXkMO-lnpKvkzl0veSvREc"/>
+          </div>
+          <div style="overflow: hidden;">
+            <h1 style="font-size: 16px; font-weight: 700; color: var(--accent); margin: 0; line-height: 1.2;">OmniLore</h1>
+            <p style="font-size: 10px; font-weight: 500; text-transform: uppercase; color: var(--text-secondary); margin: 0; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Suite Creativa</p>
+          </div>
+        </div>
+        
         <nav class="nav-menu">
           <button class="nav-btn" class:active={activeTab === "info"} class:active-pill={activeTab === "info"} onclick={() => activeTab = "info"}>
             <span class="material-symbols-outlined">info</span>
